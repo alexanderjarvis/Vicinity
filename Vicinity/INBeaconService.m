@@ -35,7 +35,6 @@
 #import "CBUUID+Ext.h"
 
 #import "GCDSingleton.h"
-#import "ConsoleView.h"
 #import "EasedValue.h"
 
 #define DEBUG_CENTRAL NO
@@ -212,7 +211,7 @@
                     status == CBPeripheralManagerAuthorizationStatusNotDetermined);
     
     if (!enabled)
-        INLog(@"bluetooth not authorized");
+        NSLog(@"bluetooth not authorized");
     
     return enabled;
 }
@@ -265,7 +264,7 @@
 - (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral
 {
     if (DEBUG_PERIPHERAL)
-        INLog(@"-- peripheral state changed: %@", peripheral.stateString);
+        NSLog(@"-- peripheral state changed: %@", peripheral.stateString);
     
     if (peripheral.state == CBPeripheralManagerStatePoweredOn) {
         [self startAdvertising];
@@ -276,9 +275,9 @@
 {
     if (DEBUG_PERIPHERAL) {
         if (error)
-            INLog(@"error starting advertising: %@", [error localizedDescription]);
+            NSLog(@"error starting advertising: %@", [error localizedDescription]);
         else
-            INLog(@"did start advertising");
+            NSLog(@"did start advertising");
     }
 }
 #pragma mark -
@@ -291,7 +290,7 @@
     proximity = easedProximity.value * -1.0f;
     
     if (DEBUG_PROXIMITY)
-        INLog(@"proximity: %d", proximity);
+        NSLog(@"proximity: %ld", (long)proximity);
     
     
     if (proximity < -70)
